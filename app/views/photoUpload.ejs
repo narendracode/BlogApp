@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h1><span class="fa fa-sign-in"></span><%= title %></h1>
+                <form id="uploadForm" enctype="multipart/form-data" action="/api/photo/upload" method="post">
+                    <input type="file" id="userPhotoInput" name="userPhoto"  accept="image/*" />
+                    <input type="submit" name="submit" value="Submit">
+                </form>
+                <hr>
+            </div>
+        </div>
+    </body>
+</html>
+     
+

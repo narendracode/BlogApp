@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+	<title><%= title %> </title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="page-header text-center">
+		<h1><span class="fa fa-anchor"></span> Home </h1>
+		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+            <ul class="nav nav-pills nav-stacked">
+  				<li class="active">
+  					<a href="/blog/create">Write New Article</a>
+  				</li>
+                <li class="active">
+                    <a href="/home">View All Articles</a>
+                </li>
+			</ul>
+		</div>
+  		<div class="col-md-7 col-md-offset-1">
+  				<div class="row">
+  				<h2> <%= blog.title %> </h2>
+                   	<br>
+                    	<%= blog.body %>
+                   <!-- <%= blog.post_date %>-->
+                    <p>
+                        posted on <%= moment(blog.post_date).format("do MMMM YYYY") %>
+                    </p>
+  			    </div>		
+  		</div>
+	</div>
+</div>
+</body>
+</html>

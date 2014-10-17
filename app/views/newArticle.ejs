@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+	<title><%= title %> </title>
+    <link rel="stylesheet" href="/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link href="/bootstrap-wysiwyg/bootstrap3-wysihtml5.min.css" rel="stylesheet">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+	<script type="text/javascript" src="/jquery/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/bootstrap-3.2.0-dist/js/bootstrap.js">
+    <script src="/bootstrap-wysiwyg/bootstrap3-wysihtml5.min.js"></script>
+    <script src="/bootstrap-wysiwyg/bootstrap3-wysihtml5.all.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+	<div class="page-header text-center">
+		<h1><span class="fa fa-anchor"></span> Post New Article </h1>
+		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<ul class="nav nav-pills">
+  				<li class="active">
+  					<a href="/home">View All Articles</a>
+  				</li>
+			</ul>
+		</div>
+  		<div class="col-md-7 col-md-offset-1">
+  			<form  action="/blog/create" method="post">
+  				<div class="form-group">
+					<label>Title</label>
+					<input type="text" class="form-control" name="title">
+				</div>
+				<div class="form-group">
+					<label>Body</label>
+				<!--	<textarea class="form-control" name="body" rows="3"></textarea>-->
+                    <textarea id='some-textarea' name="body" rows="30" cols="100"></textarea>
+				</div>
+				<button type="submit" class="btn btn-warning btn-lg">Post</button>
+  			</form>
+  		</div>
+	</div>
+</div>
+
+    <script>
+        $(document).ready(function() {
+            $('#some-textarea').wysihtml5({
+                toolbar: {
+                    "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+                    "emphasis": true, //Italics, bold, etc. Default true
+                    "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+                    "html": false, //Button which allows you to edit the generated HTML. Default false
+                    "link": true, //Button to insert a link. Default true
+                    "image": true, //Button to insert an image. Default true,
+                    "color": false, //Button to change color of font  
+                    "blockquote": true //Blockquote  
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
