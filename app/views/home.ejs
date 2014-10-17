@@ -26,7 +26,7 @@
   			<% for(var i=0; i<blogs.length; i++) { %>
   				<div class="row">
   					<a href="/blog/<%= blogs[i]._id %>" > <h3> <%= blogs[i].title %> </h3></a>
-  					<%= blogs[i].body %>
+  					<%- blogs[i].body %>
   					<%= blogs[i].post_date %>
   			    </div>		
   			<% } %>
