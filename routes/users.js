@@ -7,7 +7,7 @@ var isLoggedIn = require('../app/utils/is_logged_in');
 var selfLoggedIn = require('../app/utils/self_logged_in');
 
 router.get('/:id/edit',isLoggedIn,selfLoggedIn,users.getProfile);
-
+router.put('/:id/edit',isLoggedIn,selfLoggedIn,users.saveProfile);
 
 /* Middleware used for all requests */
 router.use(function(req,res,next){

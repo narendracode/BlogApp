@@ -30,11 +30,21 @@ exports.getAll = function(req,res){
 };
 
 exports.getProfile = function(req,res){
+    console.log("User:"+req.user);
     res.render('editProfile.ejs', {
         title: 'Edit Profile',
         user : req.user 
     }); 
 };
+
+exports.saveProfile = function(req,res){
+    console.log("profile saved User:"+req.user);
+    res.render('editProfile.ejs', {
+        title: 'Edit Profile',
+        user : req.user 
+    }); 
+};
+
 
 exports.get = function(req,res){
 	var id ;
