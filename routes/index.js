@@ -4,6 +4,7 @@ var passport = require('passport');
 
 var index = require('../app/controllers/indexController');
 var isLoggedIn = require('../app/utils/is_logged_in');
+var selfLoggedIn = require('../app/utils/self_logged_in');
 //load controllers
 
 
@@ -28,14 +29,6 @@ router.get('/login', function(req, res) {
 	 })
  );
 
-/*
-router.post('/login', passport.authenticate('local-login',{
-	 successRedirect : '/profile', 
-	 failureRedirect : '/login', 
-	 failureFlash : true 
-	 })
- );
-*/
 
 // show the signup form
 router.get('/signup', function(req, res) {
@@ -79,7 +72,7 @@ router.get('/home', isLoggedIn, function(req, res) {
 */
 router.get('/home', isLoggedIn, index.getAll);
 //getAll
-
+//router.get('/profile/:id/edit',isLoggedIn,selfLoggedIn,index.getProfile);
 
 
 //FACEBOOK ROUTES 

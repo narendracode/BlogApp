@@ -3,6 +3,11 @@ var router = express.Router();
 
 /* get the controllers */
 var users = require('../app/controllers/userController');
+var isLoggedIn = require('../app/utils/is_logged_in');
+var selfLoggedIn = require('../app/utils/self_logged_in');
+
+router.get('/:id/edit',isLoggedIn,selfLoggedIn,users.getProfile);
+
 
 /* Middleware used for all requests */
 router.use(function(req,res,next){

@@ -29,6 +29,13 @@ exports.getAll = function(req,res){
 	});
 };
 
+exports.getProfile = function(req,res){
+    res.render('editProfile.ejs', {
+        title: 'Edit Profile',
+        user : req.user 
+    }); 
+};
+
 exports.get = function(req,res){
 	var id ;
 	try{
