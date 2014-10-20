@@ -4,9 +4,9 @@ var usersApi = require('../routes/usersApi');
 var photo = require('../routes/photo');
 var blog = require('../routes/blog');
 var blogApi = require('../routes/blogApi');
+var globalApp;
 module.exports = function (app,passport){
     app.use('/', routes);
-      
     app.use('/user', users);
     app.use('/api/user', usersApi);
       
@@ -15,6 +15,8 @@ module.exports = function (app,passport){
     app.use('/blog', blog);
     app.use('/api/blog', blogApi);
 }
+
+
 
 
 

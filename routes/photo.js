@@ -5,9 +5,11 @@ var router = express.Router();
 var photo = require('../app/controllers/photoController');
 
 // show the photo upload form
+
 router.get('/', function(req, res) {
     res.render('photoUpload.ejs', { 
         title:'Upload Photo Graph', 
+        photo: ''
     });
 });
 

@@ -21,6 +21,24 @@ var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(multer({ 
+    dest: './uploads/',
+    rename: function (fieldname, filename) {
+        return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
+    },
+    onFileUploadStart: function (file) {
+        console.log(file.fieldname + ' is starting ...')
+    },
+    onFileUploadData: function (file, data) {
+        console.log(data.length + ' of ' + file.fieldname + ' arrived')
+    },
+    onFileUploadComplete: function (file) {
+        console.log(file.fieldname + ' uploaded to  ' + file.path)
+    }
+}));
+
+
+
 app.set('views', path.join(__dirname, 'app/views'));
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -42,7 +60,6 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 
-app.use(multer({ dest: './uploads/'}));
 
 
 var connect = function(){

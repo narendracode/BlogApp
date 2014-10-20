@@ -1,16 +1,27 @@
 var fs = require('fs');
-exports.upload = function(req,res,next){
-    if (req.files) { 
-        if (req.files.userPhoto.size() === 0) {
-            return next(new Error("Hey, first would you select a file?"));
-        }
-        
-        fs.exists(req.files.userPhoto.path, function(exists) { 
-            if(exists) { 
-                res.end("Got your file! : "+req.files.userPhoto.path); 
-            } else { 
-                res.end("Well, there is no magic for those who don’t believe in it!"); 
-            } 
-        }); 
-    }
+var express = require('express');
+var app = express();
+var multer = require('multer');
+exports.upload = function(req,res){
+    // get the temporary location of the file
+    var tmp_path = req.files.userPhoto.path;
+    // set where the file should actually exists - in this case it is in the "images" directory
+    var target_path = './myuploads/images/' + req.files.userPhoto.name;
+    // move the file from the temporary location to the intended location
+    fs.rename(tmp_path, target_path, function(err) {
+        if (err) throw err;
+        // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+        fs.unlink(tmp_path, function() {
+            if (err) {
+                throw err;
+            }else{
+          //  res.send('File uploaded to: ' + target_path + ' - ' + req.files.thumbnail.size + ' bytes');
+                res.render('photoUpload.ejs', { 
+                    title:'Upload Photo Graph', 
+                    photo:target_path
+                });
+            }
+        });
+    });
+    
 };

@@ -7,10 +7,14 @@
     </head>
     <body>
         <div class="container">
+            <div class="col-sm-2">
+                img1:  <img src="../../<%= photo %>"> <br>
+                img2: <img src="/Users/narendra/Documents/nodejs/BlogApp/myuploads/images/sample1413794470821.jpg">
+           </div>
             <div class="col-sm-6 col-sm-offset-3">
                 <h1><span class="fa fa-sign-in"></span><%= title %></h1>
                 <form id="uploadForm" enctype="multipart/form-data" action="/api/photo/upload" method="post">
-                    <input type="file" id="userPhotoInput" name="userPhoto"  accept="image/*" />
+                    <input type="file" multiple="multiple" id="userPhotoInput" name="userPhoto"  accept="image/*" />
                     <input type="submit" name="submit" value="Submit">
                 </form>
                 <hr>
