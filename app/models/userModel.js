@@ -6,6 +6,7 @@ var UserSchema = new Schema({
    email: { type: String, default: '' },
    username: { type: String, default: '' },
    provider: { type: String, default: '' },
+   profile_pic: {type: String, default: 'human-icon.png'},
    hashed_password: { type: String, default: '' },
    salt: { type: String, default: '' },
    authToken: { type: String, default: '' },

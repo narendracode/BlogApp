@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var ObjectId = require('mongoose').Types.ObjectId;
+var fs = require('fs');
 exports.create = function(req,res){
    var user = new User({
       name:"Narendra",
@@ -30,7 +31,6 @@ exports.getAll = function(req,res){
 };
 
 exports.getProfile = function(req,res){
-    console.log("User:"+req.user);
     res.render('editProfile.ejs', {
         title: 'Edit Profile',
         user : req.user 
@@ -38,12 +38,61 @@ exports.getProfile = function(req,res){
 };
 
 exports.saveProfile = function(req,res){
-    console.log("profile saved User:"+req.user);
-    res.render('editProfile.ejs', {
-        title: 'Edit Profile',
-        user : req.user 
-    }); 
+   var id = new ObjectId(req.user._id);
+    User.findById(id,function(err,user){
+        if(err){
+            res.send(err);
+        }
+        user.name = req.body.name;
+        user.email = req.body.email;
+        req.user = user;
+        user.save(function(err){
+            if(err)
+                res.send(err);
+            res.render('editProfile.ejs', {
+                title: 'Edit Profile',
+                user : req.user 
+            }); 
+        });
+    });
 };
+
+
+exports.uploadProfilePic = function(req,res){
+    // get the temporary location of the file
+    var tmp_path = req.files.userPhoto.path;
+    // set where the file should actually exists - in this case it is in the "images" directory
+    var target_path = './myuploads/profile-pics/' + req.files.userPhoto.name;
+    // move the file from the temporary location to the intended location
+    fs.rename(tmp_path, target_path, function(err) {
+        if (err) throw err;
+        // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+        fs.unlink(tmp_path, function() {
+            if (err) {
+                throw err;
+            }else{
+                //  res.send('File uploaded to: ' + target_path + ' - ' + req.files.thumbnail.size + ' bytes');
+                var id = new ObjectId(req.user._id);
+                User.findById(id,function(err,user){
+                    if(err){
+                        res.send(err);
+                    }
+                    user.profile_pic = req.files.userPhoto.name;
+                    req.user = user;
+                    user.save(function(err){
+                        if(err)
+                            res.send(err);
+                        res.render('editProfile.ejs', {
+                            title: 'Edit Profile',
+                            user : req.user 
+                        }); 
+                    });
+                });
+            };
+            });
+        });
+};
+
 
 
 exports.get = function(req,res){
