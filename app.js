@@ -42,7 +42,7 @@ app.use(multer({
 app.set('views', path.join(__dirname, 'app/views'));
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(express.static(path.join(__dirname, 'public/bootstrap-wysiwyg')));
+app.use(express.static(path.join(__dirname, 'myuploads')));
 //app.use(express.static(path.join(__dirname, 'public/jquery')));
 //app.use(express.static(path.join(__dirname, 'public/bootstrap-3.2.0-dist/css')));
 app.use(cookieParser()); // read cookies (needed for auth)

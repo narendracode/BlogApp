@@ -18,7 +18,7 @@ exports.upload = function(req,res){
           //  res.send('File uploaded to: ' + target_path + ' - ' + req.files.thumbnail.size + ' bytes');
                 res.render('photoUpload.ejs', { 
                     title:'Upload Photo Graph', 
-                    photo:target_path
+                    photo:'../../images/'+ req.files.userPhoto.name
                 });
             }
         });
